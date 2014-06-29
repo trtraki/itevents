@@ -1,8 +1,13 @@
 package com.itevents.fragment;
 
 import android.app.ListFragment;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -57,10 +62,12 @@ public class IteventsFragment extends ListFragment {
                                 String title = item.getString("title");
                                 String start = item.getString("start");
                                 String address = item.getString("address");
+                                String url = item.getString("url");
                                 ItEventsItem itEventsItem = new ItEventsItem(
                                         title,
                                         start,
-                                        address);
+                                        address,
+                                        url);
                                 responseObj.add(itEventsItem);
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -85,5 +92,16 @@ public class IteventsFragment extends ListFragment {
 
         vQueue.add(jsonArrayRequest);
         vQueue.start();
+    }
+
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+        ListAdapter adapter = l.getAdapter();
+        ItEventsItem itEventsItem = (ItEventsItem)adapter.getItem(position);
+
+        Uri uri = Uri.parse(itEventsItem.getUrl());
+        Intent intent = new Intent(Intent.ACTION_VIEW,uri);
+        startActivity(intent);
     }
 }

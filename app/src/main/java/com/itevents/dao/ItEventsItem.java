@@ -7,11 +7,13 @@ public class ItEventsItem {
     private String title;
     private String date;
     private String prefecture;
+    private String url;
 
-    public ItEventsItem(String title, String date, String prefecture) {
+    public ItEventsItem(String title, String date, String prefecture, String url) {
         this.title = title;
         this.date = date;
         this.prefecture = prefecture;
+        this.url = url;
     }
 
     public String getTitle() {
@@ -36,5 +38,13 @@ public class ItEventsItem {
 
     public void setPrefecture(String prefecture) {
         this.prefecture = prefecture;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }
